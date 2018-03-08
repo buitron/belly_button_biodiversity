@@ -1,5 +1,5 @@
 ## Belly Button Biodiversity
-![Bacteria by filterforge.com](Images/microbes-sem.jpg)
+![Micronaut Biomes](./images/microbes-sem.jpg)
 
 # Objective
 
@@ -171,5 +171,5 @@ The following task is completely optional
 # Solution
 
 ## Sample Page
-![img](./images/sample.png)
+![Sample Dashboard](./images/sample.png)
 
