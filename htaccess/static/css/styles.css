@@ -1,0 +1,15 @@
+.jumbotron {
+    background-color: rgba(170, 202, 42, .5) !important;
+}
+
+#charts {
+    height: 800px;
+}
+
+.card-header {
+    background-color: rgba(170, 202, 42, .5) !important;
+}
+
+.card-body {
+    background-color: rgba(202, 209, 95, .5) !important;
+}
