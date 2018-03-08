@@ -10,12 +10,13 @@ from flask import (
     redirect)
 
 import pandas as pd
+import os
 
 # #################################################
 # # flask setup
 # #################################################
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db/belly_button_biodiversity.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/belly_button_biodiversity.sqlite"
 
 
 # #################################################
@@ -23,7 +24,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db/belly_button_biodiversity.
 # #################################################
 db = SQLAlchemy(app)
 
-engine = create_engine("sqlite:///db/belly_button_biodiversity.sqlite")
+engine = create_engine(os.environ.get('DATABASE_URL', '') or "sqlite:///db/belly_button_biodiversity.sqlite")
 
 
 # #################################################
@@ -219,4 +220,4 @@ def samples(sample="None"):
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run()

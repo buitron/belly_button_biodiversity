@@ -3,7 +3,7 @@
 
 # Objective
 
-In this assignment, I will build an interactive dashboard to explore the [Belly Button Biodiversity DataSet](http://robdunnlab.com/projects/belly-button-biodiversity/).
+In this assignment, I will build an interactive dashboard to explore the [Belly Button Biodiversity DataSet](http://robdunnlab.com/projects/belly-button-biodiversity/) and host the live dashboard on Heroku.
 
 ## Step 1 - Flask API
 
@@ -172,4 +172,7 @@ The following task is completely optional
 
 ## Sample Page
 ![Sample Dashboard](./images/sample.png)
+
+
+# [Click Here to test out the Live Page](https://bb-biodiversity-flask.herokuapp.com/)
 
