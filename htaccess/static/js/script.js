@@ -41,23 +41,31 @@ function pieChart(value){
     Plotly.d3.json(url + value, (error, data) => {
         if (error) return console.warn(error);
 
-        var trace1 = {
-          values: data.sample_values.slice(0,10),
-          labels: data.otu_ids.slice(0,10),
-          marker: {colors: ['rgba(10, 84, 0, .5)', 'rgba(12, 97, 0, .5)', 'rgba(13, 113, 0, .5)', 'rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)', 'rgba(170, 202, 42, .5)', 'rgba(202, 209, 95, .5)', 'rgba(210, 206, 145, .5)', 'rgba(232, 226, 202, .5)', 'rgba(245, 240, 222, .5)']},
-          hole: .4,
-          type: 'pie'
-        };
+        Plotly.d3.json('/otu', (e,d) => {
+          if (e) return console.warn(e);
 
-        var data = [trace1];
+          var labelIndex = data.otu_ids.slice(0,10);
 
-        var layout = {
-          title: value + "'s Top 10 OTU Microbiomes",
-          colorscale: 'Earth'
-        };
+          var trace1 = {
+            values: data.sample_values.slice(0,10),
+            labels: data.otu_ids.slice(0,10),
+            marker: {colors: ['rgba(10, 84, 0, .5)', 'rgba(12, 97, 0, .5)', 'rgba(13, 113, 0, .5)', 'rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)', 'rgba(170, 202, 42, .5)', 'rgba(202, 209, 95, .5)', 'rgba(210, 206, 145, .5)', 'rgba(232, 226, 202, .5)', 'rgba(245, 240, 222, .5)']},
+            hole: .4,
+            type: 'pie',
+            text: labelIndex.map( x => d[x]),
+            textinfo: 'percent',
+            hoverinfo: 'label+text+value'
+          };
+
+          var plotData = [trace1];
+
+          var layout = {
+            title: value + "'s Top 10 OTU Microbiomes"
+          };
 
 
-        return Plotly.newPlot("pie", data, layout);
+          return Plotly.newPlot("pie", plotData, layout);
+        });
     });
 }
 
@@ -67,25 +75,31 @@ function bubbleChart(value){
     Plotly.d3.json(url + value, (error, data) => {
         if (error) return console.warn(error);
 
-        var trace1 = {
-            x: data.otu_ids,
-            y: data.sample_values,
-            mode: "markers",
-            marker: {
-                size: data.sample_values,
-                color: data.otu_ids,
-            }
-        };
+        Plotly.d3.json("/otu", (e, d) => {
+          if (e) return console.warn(e);
 
-        var data = [trace1]
+          var trace1 = {
+              x: data.otu_ids,
+              y: data.sample_values,
+              text: d,
+              hoverinfo: "x+y+text",
+              mode: "markers",
+              marker: {
+                  size: data.sample_values,
+                  color: data.otu_ids
+              }
+          };
 
-        var layout = {
-            title: value  + "'s Operational Taxonimical Unit's (OTU) Volume and Spread",
-            showLegend: false,
-        }
+          var plotData = [trace1]
+
+          var layout = {
+              title: value  + "'s Operational Taxonimical Unit's (OTU) Volume and Spread",
+              showLegend: false
+          }
 
 
-        return Plotly.newPlot("bubble", data, layout)
+          return Plotly.newPlot("bubble", plotData, layout)
+        });
     });
 }
 
